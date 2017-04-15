@@ -1,0 +1,19 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">
+        <span class="glyphicon glyphicon-alert"></span> {{ i18n.modal.title }}
+    </h3>
+</div>
+<div class="modal-body" id="modal-body">
+    {{ i18n.modal.code }} - <b>{{ code }}</b> <br/>
+    {{ i18n.modal.message }} - <b>{{ message }}</b> <br/>
+    {{ i18n.modal.time }} - <b>{{ time }}</b> <br/>
+    <span ng-if="detail !== null && detail !== undefined">
+        {{ i18n.modal.detail }} - <span class="glyphicon glyphicon-pushpin" ng-click="toggleDetail()"></span>
+        <div class="list-group-item list-group-item-warning" ng-show="showDetail == true">
+           {{ detail }}
+        </div>
+    </span>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-warning" type="button" ng-click="ok()">{{ i18n.modal.ok }}</button>
+</div>

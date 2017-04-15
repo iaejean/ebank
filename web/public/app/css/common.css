@@ -1,0 +1,7 @@
+.form-error span{
+    color: #AA3333;
+}
+
+.form-error input{
+    border-color: #AA3333;
+}

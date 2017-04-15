@@ -1,0 +1,17 @@
+<div ng-show="seccion == 'menu'">
+    <button class="btn btn-info" ng-click="changeNip()">{{ i18n.btn.changeNip }}</button><br/><br/>
+    <button class="btn btn-info" ng-click="addBeneficiary()">{{ i18n.btn.addBeneficiary }}</button><br/><br/>
+    <button class="btn btn-info" ng-click="getBalance()">{{ i18n.btn.balance }}</button><br/><br/>
+    <button class="btn btn-info" ng-click="transfer()">{{ i18n.btn.transfer }}</button><br/><br/>
+    <button class="btn btn-info" ng-click="getTransactions()">{{ i18n.btn.transactions }}</button><br/><br/>
+    <button class="btn btn-cancel" ng-click="exit()">{{ i18n.btn.exit }}</button>
+</div>
+
+<div ng-show="seccion != 'menu'">
+    <button class="btn btn-info" ng-click="goMenu()">{{ i18n.btn.menu }}</button><br/><br/>
+    <div ng-show="seccion == 'changeNip'" ng-include="'../public/app/views/changeNip.html'"></div>
+    <div ng-show="seccion == 'beneficiary'" ></div>
+    <div ng-show="seccion == 'balance'" ng-include="'../public/app/views/balance.html'"></div>
+    <div ng-show="seccion == 'transfer'"></div>
+    <div ng-show="seccion == 'transactions'" ng-include="'../public/app/views/transactions.html'"></div>
+</div>

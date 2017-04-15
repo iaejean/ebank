@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "amd",
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "target": "es5",
+    "diagnostics": true,
+    "emitBOM": false,
+    "declaration": false,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "moduleResolution": "node",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+    }
+  },
+  "compileOnSave": true,
+  "exclude": [
+    "node_modules",
+    "dist",
+    "bin",
+    "vendor"
+  ]
+}

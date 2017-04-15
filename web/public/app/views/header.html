@@ -1,0 +1,40 @@
+<div class="container">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button"
+                class="navbar-toggle"
+                data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-3"
+                ng-click="isCollapsed = !isCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+            <img alt="eBank" ng-src="../public/app/images/logo.png" width="200px">
+        </a>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <nav class="hidden-xs">
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/{{ locale }}/#!/home">{{ i18n.menu.home}}</a></li>
+            <li><a href="/{{ locale }}/#!/user">{{ i18n.menu.user }}</a></li>
+            <li><a href="/{{ locale }}/executive#!/executive">{{ i18n.menu.executive }}</a></li>
+            <li><a href="/{{ locale }}/cashier#!/cashier">{{ i18n.menu.cashier }}</a></li>
+            <li class="dropdown" uib-dropdown>
+                <a role="button" class="dropdown-toggle" uib-dropdown-toggle>
+                    <span class="lang-sm" lang="{{ locale }}"></span>
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" uib-dropdown-menu>
+                    <li ng-repeat="language in languages">
+                        <a href="#" ng-click="changeLocale(language)">
+                            <span class="lang-sm lang-lbl-full" lang="{{ language }}"></span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>

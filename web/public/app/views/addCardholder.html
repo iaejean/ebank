@@ -1,0 +1,125 @@
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>
+
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">
+        <span class="glyphicon glyphicon-plus"></span> {{ i18n.form.addCardholder }}
+    </h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <form name="addCardholderForm" id="addCardholderForm" role="form" novalidate ng-submit="addCardholder()">
+
+                <div class="form-group" ng-class="{'form-error' : (addCardholderForm.firstName.$dirty || formValid) && addCardholderForm.firstName.$invalid}">
+                    <input type="text" name="firstName" class="form-control"
+                           placeholder="{{ i18n.form.firstName }}"
+                           ng-model="cardholder.firstName"
+                           ng-required="true">
+                    <span ng-show="(addCardholderForm.firstName.$dirty || formValid) && addCardholderForm.firstName.$error.required">
+                                        {{ i18n.form.firstName }} {{ i18n.form.errors.field_required }}
+                                    </span>
+                    <span ng-show="(addCardholderForm.firstName.$dirty || formValid) && addCardholderForm.firstName.$error.pattern">
+                                        {{ i18n.form.firstName }} {{ i18n.form.errors.field_invalid }}
+                                    </span>
+                </div>
+
+                <div class="form-group" ng-class="{'form-error' : (addCardholderForm.lastName.$dirty || formValid) && addCardholderForm.lastName.$invalid}">
+                    <input type="text" name="lastName" class="form-control"
+                           placeholder="{{ i18n.form.lastName }}"
+                           ng-model="cardholder.lastName"
+                           ng-required="true">
+                    <span ng-show="(addCardholderForm.lastName.$dirty || formValid) && addCardholderForm.lastName.$error.required">
+                                        {{ i18n.form.lastName }} {{ i18n.form.errors.field_required }}
+                                    </span>
+                    <span ng-show="(addCardholderForm.lastName.$dirty || formValid) && addCardholderForm.lastName.$error.pattern">
+                                        {{ i18n.form.lastName }} {{ i18n.form.errors.field_invalid }}
+                                    </span>
+                </div>
+
+                <div class="form-group" ng-class="{'form-error' : (addCardholderForm.email.$dirty || formValid) && addCardholderForm.email.$invalid}">
+                    <input type="email" name="email" class="form-control"
+                           placeholder="{{ i18n.form.email }}"
+                           ng-model="cardholder.email"
+                           ng-required="true"
+                           ng-pattern="patterns.EMAIL">
+                    <span ng-show="(addCardholderForm.email.$dirty || formValid) && addCardholderForm.email.$error.required">
+                                        {{ i18n.form.email }} {{ i18n.form.errors.field_required }}
+                                    </span>
+                    <span ng-show="(addCardholderForm.email.$dirty || formValid) && addCardholderForm.email.$error.pattern">
+                                        {{ i18n.form.email }} {{ i18n.form.errors.field_invalid }}
+                                    </span>
+                </div>
+
+                <div class="form-group" ng-class="{'form-error' : (addCardholderForm.birthday.$dirty || formValid) && addCardholderForm.birthday.$invalid}">
+                    <p class="input-group">
+                        <input type="text" name="birthday" class="form-control"
+                               uib-datepicker-popup="{{ pattern.DATE_FORMAT }}"
+                               is-open="popup.opened"
+                               datepicker-options="dateOptions"
+                               close-text="{{ i18n.form.close }}"
+                               placeholder="{{ i18n.form.birthday }}"
+                               ng-model="cardholder.birthday"
+                               ng-required="true">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <span ng-show="(addCardholderForm.birthday.$dirty || formValid) && addCardholderForm.birthday.$error.required">
+                                        {{ i18n.form.birthday }} {{ i18n.form.errors.field_required }}
+                                    </span>
+                    <span ng-show="(addCardholderForm.birthday.$dirty || formValid) && addCardholderForm.birthday.$error.pattern">
+                                        {{ i18n.form.birthday }} {{ i18n.form.errors.field_invalid }}
+                                    </span>
+                </div>
+
+                <div class="form-group" ng-class="{'form-error' : (addCardholderForm.address.$dirty || formValid) && addCardholderForm.address.$invalid}">
+                    <input type="text" name="address" class="form-control"
+                           placeholder="{{ i18n.form.address }}"
+                           ng-model="cardholder.address"
+                           ng-required="true">
+                    <span ng-show="(addCardholderForm.address.$dirty || formValid) && addCardholderForm.address.$error.required">
+                                        {{ i18n.form.address }} {{ i18n.form.errors.field_required }}
+                                    </span>
+                    <span ng-show="(addCardholderForm.address.$dirty || formValid) && addCardholderForm.address.$error.pattern">
+                                        {{ i18n.form.address }} {{ i18n.form.errors.field_invalid }}
+                                    </span>
+                </div>
+
+                <div class="form-group" ng-class="{'form-error' : (addCardholderForm.cp.$dirty || formValid) && addCardholderForm.cp.$invalid}">
+                    <input type="text" name="cp" class="form-control"
+                           placeholder="{{ i18n.form.cp }}"
+                           ng-model="cardholder.cp"
+                           ng-required="true"
+                           ng-pattern="patterns.CP" >
+                    <span ng-show="(addCardholderForm.cp.$dirty || formValid) && addCardholderForm.cp.$error.required">
+                                        {{ i18n.form.cp }} {{ i18n.form.errors.field_required }}
+                                    </span>
+                    <span ng-show="(addCardholderForm.cp.$dirty || formValid) && addCardholderForm.cp.$error.pattern">
+                                        {{ i18n.form.cp }} {{ i18n.form.errors.field_invalid }}
+                                    </span>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button name="register-submit" class="form-control btn btn-register">
+                                {{ i18n.form.addCard }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

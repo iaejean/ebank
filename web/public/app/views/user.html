@@ -1,0 +1,57 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-lg-offset-4">
+            <h2> {{ i18n.title }}</h2>
+            <hr></hr>
+
+            <div ng-show="!accessed">
+                <form name="accessForm" id="accessForm" role="form" novalidate ng-submit="access()">
+
+                    <div class="form-group" ng-class="{'form-error' : (accessForm.number.$dirty || formValid) && accessForm.number.$invalid}">
+                        <input type="text" name="number" class="form-control" maxlength="16"
+                               placeholder="{{ i18n.cardNumber}}"
+                               ng-model="card.number"
+                               ng-required="true"
+                               ng-pattern="/\d{16}/"
+                               ng-maxlength="16">
+                        <span ng-show="(accessForm.number.$dirty || formValid) && accessForm.number.$error.required">
+                                            {{ i18n.form.number }} {{ i18n.form.errors.field_required }}
+                                        </span>
+                        <span ng-show="(accessForm.number.$dirty || formValid) && accessForm.number.$error.pattern">
+                                            {{ i18n.form.number }} {{ i18n.form.errors.field_invalid }}
+                                        </span>
+                    </div>
+
+                    <div class="form-group" ng-class="{'form-error' : (accessForm.nip.$dirty || formValid) && accessForm.nip.$invalid}">
+                        <input type="password" name="nip" class="form-control" maxlength="4"
+                               placeholder="{{ i18n.nip }}"
+                               ng-model="card.nip"
+                               ng-required="true"
+                               ng-pattern="/\d{4}/"
+                               ng-maxlength="4">
+                        <span ng-show="(accessForm.nip.$dirty || formValid) && accessForm.nip.$error.required">
+                                            {{ i18n.form.nip }} {{ i18n.form.errors.field_required }}
+                                        </span>
+                        <span ng-show="(accessForm.nip.$dirty || formValid) && accessForm.nip.$error.pattern">
+                                            {{ i18n.form.nip }} {{ i18n.form.errors.field_invalid }}
+                                        </span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <button name="register-submit" class="form-control btn btn-info">
+                                    {{ i18n.enter }}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div ng-if="accessed" ng-include="'../public/app/views/userMenu.html'">
+
+            </div>
+        </div>
+    </div>
+</div>

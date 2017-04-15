@@ -1,0 +1,35 @@
+{
+  "name": "ebank",
+  "authors": [
+    "Israel Hernandez <iaejeanx@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/public/vendor",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": "^2.5.0",
+    "angular-route": "^1.6.4",
+    "requirejs": "^2.3.3",
+    "angularAMD": "^0.2.1",
+    "moment": "^2.18.1",
+    "angular-ui-router": "^0.4.2",
+    "angular-resource": "^1.6.4",
+    "angular-animate": "^1.6.4",
+    "angular-sanitize": "^1.6.4",
+    "require-css": "^0.1.10",
+    "bootstrap": "^3.3.7",
+    "bootstrap-languages": "bootstrap-language#*",
+    "angular-loading-bar": "^0.9.0",
+    "i18n": "requirejs-i18n#^2.0.6",
+    "angular-ui-grid": "^4.0.4"
+  }
+}

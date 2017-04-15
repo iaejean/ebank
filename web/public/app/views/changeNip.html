@@ -1,0 +1,27 @@
+<form name="changeNipForm" id="changeNipForm" role="form" novalidate ng-submit="changeNipAction(changeNipForm)">
+
+    <div class="form-group" ng-class="{'form-error' : (changeNipForm.nip.$dirty || formChangeNipValid) && changeNipForm.nip.$invalid}">
+        <input type="password" name="nip" class="form-control" maxlength="4"
+               placeholder="{{ i18n.nip }}"
+               ng-model="nip"
+               ng-required="true"
+               ng-pattern="/\d{4}/"
+               ng-maxlength="4">
+        <span ng-show="(changeNipForm.nip.$dirty || formChangeNipValid) && changeNipForm.nip.$error.required">
+            {{ i18n.form.nip }} {{ i18n.form.errors.field_required }}
+        </span>
+        <span ng-show="(changeNipForm.nip.$dirty || formChangeNipValid) && changeNipForm.nip.$error.pattern">
+            {{ i18n.form.nip }} {{ i18n.form.errors.field_invalid }}
+        </span>
+    </div>
+
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <button name="register-submit" class="form-control btn btn-info">
+                    {{ i18n.enter }}
+                </button>
+            </div>
+        </div>
+    </div>
+</form>

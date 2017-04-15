@@ -1,0 +1,16 @@
+<div>
+    <table class="table">
+        <tr>
+            <th>{{ i18n.id }}</th>
+            <th>{{ i18n.amount }}</th>
+            <th>{{ i18n.date }}</th>
+            <th>{{ i18n.description }}</th>
+        </tr>
+        <tr ng-repeat="transaction in transactions">
+            <td>{{ transaction.id }}</td>
+            <td>{{ transaction.amount.toFixed(2) }}</td>
+            <td>{{ transaction.datetime }}</td>
+            <td>{{ transaction.description }}</td>
+        </tr>
+    </table>
+</div>

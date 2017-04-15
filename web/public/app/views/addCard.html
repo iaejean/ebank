@@ -1,0 +1,98 @@
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>
+
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">
+        <span class="glyphicon glyphicon-plus"></span> {{ i18n.form.addCard }}
+    </h3>
+</div>
+<div class="modal-body" id="modal-body">
+    <div class="row">
+        <div class="col-lg-12">
+            <form name="addCardForm" id="addCardForm" role="form" novalidate ng-submit="addCard()">
+
+                <div class="form-group" ng-class="{'form-error' : (addCardForm.account.$dirty || formValid) && addCardForm.account.$invalid}">
+                    <select name="account" class="form-control"
+                            placeholder="{{ i18n.form.account }}"
+                            ng-model="card.account"
+                            ng-required="true"
+                            ng-options="account as account.number for account in accounts track by account.id"
+                            ng-change="selectCardType()" >
+                    </select>
+                    <span ng-show="(addCardForm.account.$dirty || formValid) && addCardForm.account.$error.required">
+                                        {{ i18n.form.account }} {{ i18n.form.errors.field_required }}
+                                    </span>
+                    <span ng-show="(addCardForm.account.$dirty || formValid) && addCardForm.account.$error.pattern">
+                                        {{ i18n.form.account }} {{ i18n.form.errors.field_invalid }}
+                                    </span>
+                </div>
+
+                <div class="form-group" ng-class="{'form-error' : (addCardForm.cardType.$dirty || formValid) && addCardForm.cardType.$invalid}">
+                    <select name="cardType" class="form-control"
+                           placeholder="{{ i18n.form.cardType }}"
+                           ng-model="card.cardType"
+                           ng-required="true"
+                           ng-options="cardType as getCardTypeLabel(cardType) for cardType in cardTypes track by cardType.id"
+                           ng-change="selectCardType()" >
+                    </select>
+                    <span ng-show="(addCardForm.cardType.$dirty || formValid) && addCardForm.cardType.$error.required">
+                                        {{ i18n.form.cardType }} {{ i18n.form.errors.field_required }}
+                                    </span>
+                    <span ng-show="(addCardForm.cardType.$dirty || formValid) && addCardForm.cardType.$error.pattern">
+                                        {{ i18n.form.cardType }} {{ i18n.form.errors.field_invalid }}
+                                    </span>
+                </div>
+
+                <div ng-if="card.cardType.credit" class="form-group" ng-class="{'form-error' : (addCardForm.limit.$dirty || formValid) && addCardForm.limit.$invalid}">
+                    <input type="text" name="limit" class="form-control"
+                           placeholder="{{ i18n.form.limit }}"
+                           ng-model="card.limit"
+                           ng-required="true">
+                    <span ng-show="(addCardForm.limit.$dirty || formValid) && addCardForm.limit.$error.required">
+                                    {{ i18n.form.limit }} {{ i18n.form.errors.field_required }}
+                                </span>
+                    <span ng-show="(addCardForm.limit.$dirty || formValid) && addCardForm.limit.$error.pattern">
+                                    {{ i18n.form.limit }} {{ i18n.form.errors.field_invalid }}
+                                </span>
+                </div>
+
+
+                <div ng-if="!card.cardType.credit" class="form-group" ng-class="{'form-error' : (addCardForm.balance.$dirty || formValid) && addCardForm.balance.$invalid}">
+                    <input type="text" name="balance" class="form-control"
+                           placeholder="{{ i18n.form.balance }}"
+                           ng-model="card.balance"
+                           ng-required="true">
+                    <span ng-show="(addCardForm.balance.$dirty || formValid) && addCardForm.balance.$error.required">
+                                    {{ i18n.form.balance }} {{ i18n.form.errors.field_required }}
+                                </span>
+                    <span ng-show="(addCardForm.balance.$dirty || formValid) && addCardForm.balance.$error.pattern">
+                                    {{ i18n.form.balance }} {{ i18n.form.errors.field_invalid }}
+                                </span>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3">
+                            <button name="register-submit" class="form-control btn btn-info">
+                                {{ i18n.form.addCard }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+

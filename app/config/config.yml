@@ -1,0 +1,163 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: en
+
+framework:
+    #esi: ~
+    translator: { fallbacks: ['%locale%'] }
+    secret: '%secret%'
+    router:
+        resource: '%kernel.root_dir%/config/routing.yml'
+        strict_requirements: ~
+    form: ~
+    csrf_protection: ~
+    validation: { enable_annotations: true }
+    #serializer: { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale: '%locale%'
+    trusted_hosts: ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+        name: SESSION_ID
+        cookie_lifetime: 3600
+    fragments: ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+
+# bin/console doctrine:mapping:import --force AcmeBlogBundle xml
+# bin/console doctrine:mapping:convert annotation ./src
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver: pdo_mysql
+        host: '%database_host%'
+        port: '%database_port%'
+        dbname: '%database_name%'
+        user: '%database_user%'
+        password: '%database_password%'
+        charset: UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/../var/data/data.sqlite"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path: '%database_path%'
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/migrations"
+    namespace: Application\Migrations
+    table_name: migration_version
+    name: Application Migrations
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: '%mailer_transport%'
+    host: '%mailer_host%'
+    username: '%mailer_user%'
+    password: '%mailer_password%'
+    spool: { type: memory }
+
+# Monolog Configuration
+monolog:
+    handlers:
+        console:
+            type: console
+            verbosity_levels:
+                VERBOSITY_NORMAL: NOTICE
+            formatter: monolog_formatter
+
+jms_serializer:
+    handlers:
+        datetime:
+            #default_format: "c" # ISO8601
+            default_timezone: "America/Mexico_city" # defaults to whatever timezone set in php.ini or via date_default_timezone_set
+
+    property_naming:
+        #separator:
+        lower_case: true
+
+    metadata:
+        cache: file
+        debug: "%kernel.debug%"
+        file_cache:
+            dir: "%kernel.cache_dir%/serializer"
+        # Using auto-detection, the mapping files for each bundle will be
+        # expected in the Resources/config/serializer directory.
+        #
+        # Example:
+        # class: My\FooBundle\Entity\User
+        # expected path: @MyFooBundle/Resources/config/serializer/Entity.User.(yml|xml|php)
+        #auto_detection: true
+
+    visitors:
+        xml:
+            doctype_whitelist:
+                - '<?xml version="1.0" encoding="UTF-8" ?>' # an authorized document type for xml deserialization
+                - '<!DOCTYPE authorized SYSTEM "http://some_url">' # an authorized document type for xml deserialization
+
+# JMSDIExtra Configuration
+jms_di_extra:
+    locations:
+        all_bundles: false
+        bundles: [Iaejean, IaejeanBundle]
+        directories: ["%kernel.root_dir%/../src/Iaejean"]
+    automatic_controller_injections:
+        properties:
+            request: "@request"
+            router: "@router"
+        method_calls:
+            setRouter: ["@router"]
+    disable_grep: false
+    doctrine_integration: true
+
+# JMSi18nRounting Configuration
+jms_i18n_routing:
+    default_locale: en
+    locales: [en, es]
+    strategy: prefix
+
+# JMSTranslation Configuration
+# bin/console translation:extract en --config=app
+jms_translation:
+    configs:
+        app:
+            dirs: ['%kernel.root_dir%', '%kernel.root_dir%/../src']
+            output_dir: '%kernel.root_dir%/Resources/translations'
+            ignored_domains: [routes]
+            excluded_names: ["*TestCase.php", "*Test.php"]
+            excluded_dirs: [cache, data, logs]
+            #extractors: [alias_of_the_extractor]
+
+# JMSSecurityExtra Configuration
+jms_security_extra:
+    secure_all_services: false
+    enable_iddqd_attribute: false
+    expressions: true
+    voters:
+        disable_authenticated: false
+        disable_role: false
+        disable_acl: false
+    util:
+        secure_random: ~
